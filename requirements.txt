@@ -1,0 +1,11 @@
+Django
+
+# Plugs into PostgreSQL (only db that works with heroku properly)
+psycopg2-binary
+
+# Allows forms to be styled by bootstrap
+django-crispy-forms
+
+# For Heroku hosting
+gunicorn
+django-heroku

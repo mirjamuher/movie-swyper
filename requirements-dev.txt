@@ -1,0 +1,4 @@
+# Developer tools (doesn't need to be installed on heroku)
+flake8
+coverage
+pytest
