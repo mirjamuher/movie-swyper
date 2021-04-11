@@ -1,6 +1,9 @@
 from django.urls import path
-from . import views
+from movieswyper.views import index, select
 
+app_name = 'movieswyper'
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', index.index, name='index'),
+    path('select/genres', select.genres, name='select_genres'),
+    path('select/movies', select.movies, name='select_movies'),
 ]
