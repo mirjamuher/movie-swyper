@@ -4,16 +4,20 @@
 
 {% block content %}
 
+    <h2> Select the Gernes you like and click save at the bottom </h2>
+
     <div class="card-deck row-cols-2 row-cols-sm-3 row-cols-md-4">
     {% for genre in genres %}
         <div class="col mb-3">
             <div class="genre genre-card genre-{{ genre.name|slugify }}">
                 <div class="card-body">
-                    <p class="card-text font-weight-bold "> {{ genre.name }}</p>
+                    <p class="card-text font-weight-bold"> {{ genre.name }}</p>
                 </div>
             </div>
         </div>
     {% endfor %}
     </div>
     
+    <button type="button" class="btn btn-success">S A V E</button>
+
 {% endblock %}
