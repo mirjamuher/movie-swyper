@@ -1,11 +1,10 @@
 /*! `Herbie` Bootstrap 4 theme */
 @import url(https://use.fontawesome.com/releases/v5.0.10/css/all.css);
 @import url(https://fonts.googleapis.com/css?family=Nunito:200,300,400,700);
-$font-family-base:Nunito;
+$font-family-base: Nunito;
 @import url(https://fonts.googleapis.com/css?family=Crete+Round:200,300,400,700);
 $headings-font-family:Crete Round;
 
-$enable-grid-classes:false;
 $primary:#083358;
 $secondary:#F67280;
 $success:#0074E4;
@@ -16,4 +15,94 @@ $light:#F2F2F0;
 $dark:#072247;
 @import "bootstrap/scss/bootstrap";
 
-// Add SASS theme customizations here..
+
+// Additional Colour-Scheme
+$action: #012622;
+$adventure: #E18335;
+$animation: #F4D6CC;
+$comedy: #FAF33E;
+$crime: #0A1128;
+$documentary: #1E91D6;
+$drama: #586BA4;
+$family: #C83E4D;
+$fantasy: #3F0D12;
+$history: #659157;
+$horror: #55505C;
+$music: #FFBCB5;
+$mystery: #0072BB;
+$romance: #FAD4D8;
+$science-fiction: #5D737E;
+$tv-movie: #42F2F7;
+$thriller: #062726;
+$war: #231651;
+$western: #7D4F50;
+
+$genre-colors: (
+    "action": $action,
+    "adventure": $adventure,
+    "animation": $animation,
+    "comedy": $comedy,
+    "crime": $crime,
+    "documentary": $documentary,
+    "drama": $drama,
+    "family": $family,
+    "fantasy": $fantasy,
+    "history": $history,
+    "horror": $horror,
+    "music": $music,
+    "mystery": $mystery,
+    "romance": $romance,
+    "science-fiction": $science-fiction,
+    "tv-movie": $tv-movie,
+    "thriller": $thriller,
+    "war": $war,
+    "western": $western,
+);
+
+$genre-font-color: (
+    "action": $white,
+    "adventure": $white,
+    "animation": $white,
+    "comedy": $white,
+    "crime": $white,
+    "documentary": $white,
+    "drama": $white,
+    "family": $white,
+    "fantasy": $white,
+    "history": $white,
+    "horror": $white,
+    "music": $white,
+    "mystery": $white,
+    "romance": $white,
+    "science-fiction": $white,
+    "tv-movie": $white,
+    "thriller": $white,
+    "war": $white,
+    "western": $white,
+);
+
+// Basic Formatting
+
+body {
+    font: 100% $font-family-base;
+}
+
+.genre {
+    color: $black;
+}
+
+.genre-card {
+    @extend .card;
+    text-align: center;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    border: none;
+    border-radius: 10px;
+}
+
+@each $genreName, $color in $genre-colors {
+    .genre-#{$genreName} {
+        background-color: $color;
+        color: map-get($map: $genre-font-color, $key: $genreName);
+    }
+}

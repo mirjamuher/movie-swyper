@@ -4,13 +4,12 @@
 
 {% block content %}
 
-    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4">
+    <div class="card-deck row-cols-2 row-cols-sm-3 row-cols-md-4">
     {% for genre in genres %}
-        <div class="col mb-4">
-            <div class="card">
+        <div class="col mb-3">
+            <div class="genre genre-card genre-{{ genre.name|slugify }}">
                 <div class="card-body">
                     <p class="card-text"> {{ genre.name }}</p>
-                    <button type="button" class="btn btn-primary">Test</button>
                 </div>
             </div>
         </div>
