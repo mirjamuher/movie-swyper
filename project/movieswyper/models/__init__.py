@@ -7,7 +7,10 @@ p.s. not needed in views because I import the files there directly, not the enti
 
 __all__ = [
     'Movie',
+    'ProductionCompany',
     'Genre',
+    'Profile',
+    'UserMovieRating',
 ]
 
 

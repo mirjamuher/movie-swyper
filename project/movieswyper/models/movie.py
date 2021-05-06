@@ -5,17 +5,16 @@ Notes for populating this database:
 3) API id gets moved into "tmdb_id"
 """
 
-# TODO: Connect Movie & Genre with linked list
+# TODO: Figure out if I might want 
 
 from django.db import models
-from django.db.models.constraints import UniqueConstraint
 
 class Movie(models.Model):
     # These will come from TMDB
     backdrop_path = models.CharField(max_length=None, blank=True)  # Field is allowed to be blank
     imbd_id = models.CharField(max_length=None, blank=True)
     tmdb_id = models.IntegerField()
-    genres = models.ManyToManyField('Genre', on_delete=models.CASCADE)
+    genres = models.ManyToManyField('Genre', on_delete=models.CASCADE) # Connects to Genre Model
     original_language = models.CharField(max_length=None)
     original_title = models.CharField(max_length=None, blank=True)
     overview = models.TextField()
@@ -35,6 +34,16 @@ class Movie(models.Model):
     def __str__(self):
         return self.title
 
+class ProductionCompany(models.Model):
+    '''
+    TMdb API gives list of production companies involved in movie making -->
+    this might be nice information for users to sort movies by (e.g. "Pixar")
+    '''
+    logo_path = models.CharField(max_length=None, blank=True)
+    name = models.CharField(max_length=None)
+    origin_country = models.CharField(max_length=None, blank=True)
+    movies_produced = models.ManyToManyField(Movie)
+    
 
 """
 {"adult":false,

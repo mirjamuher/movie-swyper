@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'movieswyper',
 ]
 
+AUTH_USER_MODEL = 'movieswyper.User' # Points to my customised User Model
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
