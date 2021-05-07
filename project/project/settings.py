@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #'movieswyper',
     'crispy_forms',
-    'movieswyper.apps.MovieswyperConfig'
+    'movieswyper.apps.MovieswyperConfig',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

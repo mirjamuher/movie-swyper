@@ -1,5 +1,6 @@
 Django
 requests
+django-extensions 
 
 # Plugs into PostgreSQL (only db that works with heroku properly)
 psycopg2-binary

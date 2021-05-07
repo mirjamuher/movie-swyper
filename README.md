@@ -12,3 +12,6 @@ Installation Instructions (rough notes)
 2. install dependencies in requirements.txt
 3. install npm dependencies
 4. Get an API Key with Movie Database API and make file local_settings.py with Global Variable saving it
+
+To populate the database, you also need to install Django-Extensions:
+1. $ pip install django-extensions
