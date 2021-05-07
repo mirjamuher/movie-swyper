@@ -6,7 +6,7 @@ class Movie(models.Model):
     # These will come from TMDB
     backdrop_path = models.CharField(max_length=255, blank=True)  # Field is allowed to be blank
     imbd_id = models.CharField(max_length=255, blank=True)
-    tmdb_id = models.IntegerField()
+    tmdb_id = models.IntegerField(db_index=True, unique=True)
     genres = models.ManyToManyField('Genre') # Connects to Genre Model
     original_language = models.CharField(max_length=255)
     original_title = models.CharField(max_length=255, blank=True)

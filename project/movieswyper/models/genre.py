@@ -2,6 +2,7 @@ from django.db import models
 
 class Genre(models.Model):
     # From TMDB
+    tmdb_id = models.IntegerField(db_index=True, unique=True)
     name = models.CharField(max_length=255)
 
     # Mine
