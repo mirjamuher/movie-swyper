@@ -29,15 +29,16 @@ def run_first_time():
     Get movie/top_rated requires arg "page", 20 movies per page, aka initially need first 25 pages
     #TODO: Change page to 1
     """
-    url = f'https://api.themoviedb.org/3/movie/top_rated?api_key={settings.TMDB_API_KEY}&language=en-US&page=1'
-    response = requests.get(url)
+    url = f'https://api.themoviedb.org/3/genre/movie/list'
+
+    response = requests.get(url, params={
+        'api_key': settings.TMDB_API_KEY,
+        'language': 'en-US',
+    })
 
     if response.status_code != 200:
         # TODO: Might need to raise alarm for Views --> figure out how later 
-        if response["status_message"]:
-            error_msg = response["status_message"]
-        else: 
-            error_msg = "Something went wrong"
+        error_msg = response.get("status_message", "Something went wrong")
         print(error_msg)
     else:
         data = response.json()
