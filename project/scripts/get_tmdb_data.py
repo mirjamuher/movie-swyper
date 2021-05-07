@@ -9,6 +9,7 @@ for further movies and cache information in my system when required
 import requests
 from pprint import pprint #for debugging
 from django.conf import settings
+from movieswyper.models import Movie, Genre
 
 def run(first_time=False):
     """
