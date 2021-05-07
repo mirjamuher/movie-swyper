@@ -35,7 +35,6 @@ def run_first_time():
             )
             genre_data.save()
 
-
 def get_genre_list(result_dictionary):
     for key, value in result_dictionary.items():
         if key == "genres":
