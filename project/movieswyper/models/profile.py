@@ -2,10 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.db.models.constraints import UniqueConstraint
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    liked_genres = models.ManyToManyField('Genre', on_delete=models.CASCADE)
+    liked_genres = models.ManyToManyField('Genre')
 
 """
 Below: hooking the create_user_profile and save_user_profile methods to the User model, 
@@ -23,7 +24,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 class UserMovieRating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    movie = models.ForeignKey('Movie', on_delete=models.CASCADE)
     rating = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_last = models.DateTimeField(auto_now=True)

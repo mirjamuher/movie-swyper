@@ -1,31 +1,24 @@
-"""
-Notes for populating this database:
-1) Not importing any movies with "adult: true"
-2) Provide Default info for most of these when Null
-3) API id gets moved into "tmdb_id"
-"""
-
-# TODO: Figure out if I might want 
-
 from django.db import models
+# from .genre import Genre --> Don't need that because Django allows you to use string-ified 
+# of field/signal name and knows to look for a model with that name in the same app
 
 class Movie(models.Model):
     # These will come from TMDB
-    backdrop_path = models.CharField(max_length=None, blank=True)  # Field is allowed to be blank
-    imbd_id = models.CharField(max_length=None, blank=True)
+    backdrop_path = models.CharField(max_length=255, blank=True)  # Field is allowed to be blank
+    imbd_id = models.CharField(max_length=255, blank=True)
     tmdb_id = models.IntegerField()
-    genres = models.ManyToManyField('Genre', on_delete=models.CASCADE) # Connects to Genre Model
-    original_language = models.CharField(max_length=None)
-    original_title = models.CharField(max_length=None, blank=True)
+    genres = models.ManyToManyField('Genre') # Connects to Genre Model
+    original_language = models.CharField(max_length=255)
+    original_title = models.CharField(max_length=255, blank=True)
     overview = models.TextField()
     popularity = models.FloatField(blank=True)
-    poster_path = models.CharField(max_length=None, blank=True)
+    poster_path = models.CharField(max_length=255, blank=True)
     release_date = models.DateField()
     runtime = models.IntegerField()
-    tagline = models.CharField(max_length=None, blank=True)
-    title = models.CharField(max_length=None)
+    tagline = models.CharField(max_length=255, blank=True)
+    title = models.CharField(max_length=255)
     vote_average = models.FloatField(blank=True)
-    vote_count =  models.CharField(max_length=None, blank=True)
+    vote_count =  models.CharField(max_length=255, blank=True)
 
     # These are mine
     created_at = models.DateTimeField(auto_now_add=True)
@@ -39,10 +32,10 @@ class ProductionCompany(models.Model):
     TMdb API gives list of production companies involved in movie making -->
     this might be nice information for users to sort movies by (e.g. "Pixar")
     '''
-    logo_path = models.CharField(max_length=None, blank=True)
-    name = models.CharField(max_length=None)
-    origin_country = models.CharField(max_length=None, blank=True)
-    movies_produced = models.ManyToManyField(Movie)
+    logo_path = models.CharField(max_length=255, blank=True)
+    name = models.CharField(max_length=255)
+    origin_country = models.CharField(max_length=255, blank=True)
+    movies_produced = models.ManyToManyField('Movie')
     
 
 """

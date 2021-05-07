@@ -2,7 +2,7 @@ from django.db import models
 
 class Genre(models.Model):
     # From TMDB
-    name = models.TextField(max_length=None)
+    name = models.CharField(max_length=255)
 
     # Mine
     created_at = models.DateTimeField(auto_now_add=True)
