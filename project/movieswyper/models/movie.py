@@ -5,7 +5,7 @@ from django.db import models
 class Movie(models.Model):
     # These will come from TMDB
     backdrop_path = models.CharField(max_length=255, blank=True)  # Field is allowed to be blank
-    imbd_id = models.CharField(max_length=255, blank=True)
+    imbd_id = models.CharField(max_length=255, blank=True) # contains letters
     tmdb_id = models.IntegerField(db_index=True, unique=True)
     genres = models.ManyToManyField('Genre') # Connects to Genre Model
     original_language = models.CharField(max_length=255)
@@ -32,6 +32,7 @@ class ProductionCompany(models.Model):
     TMdb API gives list of production companies involved in movie making -->
     this might be nice information for users to sort movies by (e.g. "Pixar")
     '''
+    tmdb_id = models.IntegerField(db_index=True, unique=True)
     logo_path = models.CharField(max_length=255, blank=True)
     name = models.CharField(max_length=255)
     origin_country = models.CharField(max_length=255, blank=True)
