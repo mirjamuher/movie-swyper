@@ -91,6 +91,9 @@ body {
     color: $black;
 }
 
+
+// Formatting select_genres
+
 .genre-card {
     @extend .card;
     text-align: center;
@@ -102,7 +105,17 @@ body {
 
 @each $genreName, $color in $genre-colors {
     .genre-#{$genreName} {
-        background-color: $color;
-        color: map-get($map: $genre-font-color, $key: $genreName);
+        border: $color solid 1px;
+        color: $color;
+        background-color: white;
+
+        // Old Design: //
+        //background-color: $color;
+        //color: map-get($map: $genre-font-color, $key: $genreName); 
+
+        &.selected, &:hover {
+            background-color: $color;
+            color: map-get($map: $genre-font-color, $key: $genreName);
+        }
     }
 }
