@@ -4,21 +4,21 @@ from django.db import models
 
 class Movie(models.Model):
     # These will come from TMDB
-    backdrop_path = models.CharField(max_length=255, blank=True)  # Field is allowed to be blank
-    imbd_id = models.CharField(max_length=255, blank=True) # contains letters
-    tmdb_id = models.IntegerField(db_index=True, unique=True)
+    backdrop_path = models.CharField(max_length=255, blank=True, null=True)  # Field is allowed to be blank
+    imbd_id = models.CharField(max_length=255, blank=True, null=True) # contains letters
+    tmdb_id = models.IntegerField(db_index=True, unique=True, null=True)
     genres = models.ManyToManyField('Genre') # Connects to Genre Model
     original_language = models.CharField(max_length=255)
-    original_title = models.CharField(max_length=255, blank=True)
+    original_title = models.CharField(max_length=255, blank=True, null=True)
     overview = models.TextField()
-    popularity = models.FloatField(blank=True)
-    poster_path = models.CharField(max_length=255, blank=True)
+    popularity = models.FloatField(blank=True, null=True)
+    poster_path = models.CharField(max_length=255, blank=True, null=True)
     release_date = models.DateField()
     runtime = models.IntegerField()
-    tagline = models.CharField(max_length=255, blank=True)
+    tagline = models.CharField(max_length=255, blank=True, null=True)
     title = models.CharField(max_length=255)
-    vote_average = models.FloatField(blank=True)
-    vote_count =  models.CharField(max_length=255, blank=True)
+    vote_average = models.FloatField(blank=True, null=True)
+    vote_count =  models.CharField(max_length=255, blank=True, null=True)
 
     # These are mine
     created_at = models.DateTimeField(auto_now_add=True)
@@ -33,9 +33,9 @@ class ProductionCompany(models.Model):
     this might be nice information for users to sort movies by (e.g. "Pixar")
     '''
     tmdb_id = models.IntegerField(db_index=True, unique=True)
-    logo_path = models.CharField(max_length=255, blank=True)
+    logo_path = models.CharField(max_length=255, blank=True, null=True)
     name = models.CharField(max_length=255)
-    origin_country = models.CharField(max_length=255, blank=True)
+    origin_country = models.CharField(max_length=255, blank=True, null=True)
     movies_produced = models.ManyToManyField('Movie')
     
 
