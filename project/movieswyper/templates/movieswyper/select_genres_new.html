@@ -1,0 +1,59 @@
+{% extends "movieswyper/base.html" %}
+{% load static %}
+
+{% block page_title %} Select your favourite genres! {% endblock %}
+
+{% block content %}
+
+    <h2 class="my-5 text-dark"> Select the genres you like and click save at the bottom </h2>
+
+<!-- TODO: hide the checkbox with CSS and figure out the current bug in the display 
+Then rework the submit to actually send the data where you need it
+Then save the new information in your database 
+https://docs.djangoproject.com/en/3.2/intro/tutorial04/
+-->
+
+    <div class="card-deck row-cols-1 row-cols-sm-3 row-cols-md-4">
+    <form action="{% url 'movieswyper:select_genres' %}" method="post">
+        {% csrf_token %}
+        {% for genre in genres %}
+            <div class="col mb-3">
+                <div class="genre genre-card genre-{{ genre.name|slugify }}">
+                    <div class="card-body">
+                        <input type="checkbox" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.name }}">
+                        <label class="card-text font-weight-bold"> {{ genre.name|slugify }} </label><br>
+                    </div>
+                <div>
+            </div>
+        {% endfor %}
+        <input type="submit" value="todo">
+    </form>
+    </div>
+
+<!--
+    <div class="card-deck row-cols-1 row-cols-sm-3 row-cols-md-4">
+    {% for genre in genres %}
+        <div class="col mb-3">
+            <div class="genre genre-card genre-{{ genre.name|slugify }}">
+                <div class="card-body">
+                    <p class="card-text font-weight-bold"> {{ genre.name|slugify }}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+-->
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 offset-md-11">
+                <input type="submit button" value="Vote" class="btn btn-secondary btn-lg text-light">S A V E</button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block additional_js %} 
+    <script src='{% static "movieswyper/js/select_genres.js" %}'></script>
+{% endblock %}

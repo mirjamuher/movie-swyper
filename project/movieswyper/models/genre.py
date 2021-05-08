@@ -8,3 +8,7 @@ class Genre(models.Model):
     # Mine
     created_at = models.DateTimeField(auto_now_add=True)
     updated_last = models.DateTimeField(auto_now=True)
+
+
+    def __str__(self):
+        return self.name

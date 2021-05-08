@@ -2,17 +2,16 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
 
+from movieswyper.models import Genre
 from project.settings import TMDB_API_KEY
-import requests
-
 
 # add login later
 def genres(request):
-    response = requests.get(f"https://api.themoviedb.org/3/genre/movie/list?api_key={TMDB_API_KEY}&language=en-US")
-    if response.status_code == 200:
-        info_json = response.json()
-    return render(request, 'movieswyper/select_genres.html', {
-        'genres': info_json['genres'],
+
+    genre_obj_list = Genre.objects.all()
+
+    return render(request, 'movieswyper/select_genres_new.html', {
+        'genres': genre_obj_list,
     })
 
 """
