@@ -1,5 +1,5 @@
 # movie-swyper
-Take the questions out of movie night suggestions! (rhymes if you pronounce it right)
+Take the questions out of movie night suggestions!
 
 To be edited as the project evolves.
 
@@ -15,3 +15,4 @@ Installation Instructions (rough notes)
 
 To populate the database locally, run the following commands:
 $ python manage.py runscript get_genre_data --script-args first_time=True
+Careful: check get_tmdb_data.py and configure how many movies you want to pull from TMDb, can be time & ressource consuming

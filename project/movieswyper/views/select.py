@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 
+from movieswyper.models import Genre
 from project.settings import TMDB_API_KEY
 import requests
 
