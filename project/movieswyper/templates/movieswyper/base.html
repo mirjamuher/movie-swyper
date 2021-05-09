@@ -9,12 +9,13 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href='{% static "movieswyper/css/starter.css" %}'>
+    {% block extra_css %}{% endblock %}
  
     <!-- Pagetitle -->
-    <title>{% block page_title %}Movie Swyper{% endblock %}</title>
+    <title>{% block page_title %}Movie Swyper{% endblock %}</title> 
 </head>
 
-<body>
+<body {% block custom_body_id %}{% endblock %}> <!-- For targeted styling -->
   <nav class="navbar navbar-expand-lg navbar-light bg-primary">
     <a class="navbar-brand text-secondary font-weight-bold" href="#">Movie Swyper</a>
 

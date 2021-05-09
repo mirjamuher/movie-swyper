@@ -1,0 +1,20 @@
+@use 'starter';
+
+body#page-select_genres {
+    input[type="checkbox"] {
+        display: none;
+    }
+}
+
+
+// you can use the ID approach instead
+// add a new sass file with the styles for the select genre's page
+// at the top level off that file, specify the page selector
+// body#page-select_genres {
+//  ...
+// }
+// in your starter sass file, include your new sass file at the bottom
+// https://sass-lang.com/documentation/at-rules/use
+
+
+// Tim's proposal: https://codepen.io/timdawborn/pen/xxqbmJG */
