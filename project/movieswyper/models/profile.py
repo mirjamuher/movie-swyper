@@ -8,9 +8,12 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     liked_genres = models.ManyToManyField('Genre')
 
+<<<<<<< HEAD
     def __str__(self):
         return self.user.username
 
+=======
+>>>>>>> 0903f9b3b6eef8aa753254d42ef7404d58c8dd2a
 """
 Below: hooking the create_user_profile and save_user_profile methods to the User model, 
 whenever a save event occurs.
