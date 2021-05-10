@@ -31,11 +31,12 @@ def genres(request):
     # If form is sent:
     if request.method == 'POST':
         # Get QuearyDict of selected Genre_ids
-        selected_genre_ids = request.POST['choice']
+        selected_genre_ids = request.POST.getlist('choice')
 
         if not selected_genre_ids:
-            return render(request, 'movieswyper/select_genres_new.html', {  # TODO Check if that actually works
+            return render(request, 'movieswyper/select_genres.html', {  # TODO Check if that actually works
                 'error_message': "Please choose at least one Genre.",
+                'genres': genre_obj_list,
             })
             
         genre_objs = []
@@ -44,23 +45,24 @@ def genres(request):
                 genre = Genre.objects.get(id=genre)
             except (KeyError, Genre.DoesNotExist):
                 # Redisplaying form
-                return render(request, 'movieswyper/select_genres_new.html', {  # TODO Check if that actually works
+                return render(request, 'movieswyper/select_genres.html', {  # TODO Check if that actually works
                     'error_message': "Non-Valid Genre selected. Please try again",
+                    'genres': genre_obj_list,
                 })
             else:
                 genre_objs.append(genre)
         
         # Update User Profile: clear existing genres, bulk add new ones
-        crnt_user.liked_genres_set.clear()
-        crnt_user.liked_genres_set.add(*genre_objs)
+        crnt_user.liked_genres.clear()
+        crnt_user.liked_genres.add(*genre_objs)
         
-        return HttpResponseRedirect(reverse('movieswyper/select_genres_new.html'))
+        return HttpResponseRedirect(reverse('movieswyper:select_genres'))
         # TODO: Display Succes Message, maybe through https://docs.djangoproject.com/en/3.2/topics/http/sessions/#examples 
 
 
     # If the site is called for the first time:
     else:
-        return render(request, 'movieswyper/select_genres_new.html', {
+        return render(request, 'movieswyper/select_genres.html', {
             'genres': genre_obj_list,
         })
 
