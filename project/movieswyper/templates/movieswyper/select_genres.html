@@ -1,31 +1,40 @@
 {% extends "movieswyper/base.html" %}
 {% load static %}
 
-<title>{% block page_title %} Select your favourite genres! {% endblock %}</title>
+{% block extra_css %} <link rel="stylesheet" href='{% static "movieswyper/css/selected_genres.css" %}'> {% endblock %}
+{% block page_title %} Select your favourite genres! {% endblock %}
+
+{% block custom_body_id %} id="page-select_genres" {% endblock %}
 
 {% block content %}
 
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}    
+
     <h2 class="my-5 text-dark"> Select the genres you like and click save at the bottom </h2>
 
-    <div class="card-deck row-cols-1 row-cols-sm-3 row-cols-md-4">
-    {% for genre in genres %}
-        <div class="col mb-3">
-            <div class="genre genre-card genre-{{ genre.name|slugify }}">
-                <div class="card-body">
-                    <p class="card-text font-weight-bold"> {{ genre.name|slugify }}</p>
+    <form class="card-deck row-cols-1 row-cols-sm-3 row-cols-md-4" action="{% url 'movieswyper:select_genres' %}" method="post">
+        {% csrf_token %}
+        {% for genre in genres %}
+        <div class="container">
+            <div class="col mb-3">
+                <div class="genre genre-card genre-{{ genre.name|slugify }}">
+                    <div class="card-body">
+                        <input type="checkbox" name="choice" value="{{ genre.id }}">
+                        <label class="card-text font-weight-bold"> {{ genre.name|slugify }} </label><br>
+                    </div>
                 </div>
             </div>
         </div>
-    {% endfor %}
-    </div>
-    
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 offset-md-11">
-                <button type="button" class="btn btn-secondary btn-lg text-light">S A V E</button>
+        {% endfor %}
+        <div class="w-100"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col align-self-end">
+                    <input id="submitBtn" type="submit" value="S A V E" class="btn btn-secondary btn-lg text-light">
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 
 {% endblock %}
 
