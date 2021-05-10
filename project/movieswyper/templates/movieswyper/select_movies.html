@@ -1,3 +1,22 @@
-<h1>Hi, this will be where you can choose among movies</h1>
+{% extends "movieswyper/base.html" %}
+{% load static %}
 
-<h3>Hmm, should I make another page like this for series? To think about</h3>
+{% block extra_css %} {% endblock %}
+{% block page_title %} Rate your first movies! {% endblock %}
+
+{% block custom_body_id %} id="page-select_movies" {% endblock %}
+
+{% block content %}
+    {% include 'movieswyper/messages.html' %}
+
+    <h2 class="my-5 text-dark"> How would you rate the movies below? </h2>
+    
+    <ul class="list-group">
+    {% for movie in movies %}
+        <li class="list-group-item"> {{ movie.title }}</li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
+
+{% block additional_js %} {% endblock %}

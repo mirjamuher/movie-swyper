@@ -21,6 +21,10 @@ Gameplan:
 
 # FUNCTIONS HANDLING THE ORM
 
+def get_top_movies(liked_genres):
+    # TODO: grab top movies from database based on liked genres.
+    # Important: figure out the math to elegantly show 30, no matter how many genres liked
+    pass
 
 # ACTUAL VIEWS
 
@@ -56,7 +60,7 @@ def genres(request):
         crnt_user.liked_genres.clear()
         crnt_user.liked_genres.add(*genre_objs)
 
-        # DIsplay Success Message
+        # Display Success Message
         messages.success(request, 'Your profile has been updated.')
         return HttpResponseRedirect(reverse('movieswyper:select_genres'))
 
@@ -66,32 +70,13 @@ def genres(request):
             'genres': genre_obj_list,
         })
 
-"""
-Genre info:
-{"genres":[
-{"id":28,"name":"Action"},
-{"id":12,"name":"Adventure"},
-{"id":16,"name":"Animation"},
-{"id":35,"name":"Comedy"},
-{"id":80,"name":"Crime"},
-{"id":99,"name":"Documentary"},
-{"id":18,"name":"Drama"},
-{"id":10751,"name":"Family"},
-{"id":14,"name":"Fantasy"},
-{"id":36,"name":"History"},
-{"id":27,"name":"Horror"},
-{"id":10402,"name":"Music"},
-{"id":9648,"name":"Mystery"},
-{"id":10749,"name":"Romance"},
-{"id":878,"name":"Science Fiction"},
-{"id":10770,"name":"TV Movie"},
-{"id":53,"name":"Thriller"},
-{"id":10752,"name":"War"},
-{"id":37,"name":"Western"}
-]}
-"""
-
 # add login later
 def movies(request):
-    context = {}
+    crnt_user = request.user.profile
+    liked_genres = crnt_user.liked_genres.all
+    movie_obj_list = get_top_movies(liked_genres)
+
+    context = {
+        'movies': movie_obj_list,
+    }
     return render(request, 'movieswyper/select_movies.html', context)
