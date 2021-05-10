@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.contrib import messages
 
 from movieswyper.models import Genre
 from project.settings import TMDB_API_KEY
@@ -34,8 +35,8 @@ def genres(request):
         selected_genre_ids = request.POST.getlist('choice')
 
         if not selected_genre_ids:
-            return render(request, 'movieswyper/select_genres.html', {  # TODO Check if that actually works
-                'error_message': "Please choose at least one Genre.",
+            messages.error(request, 'Please choose at least one Genre.')
+            return render(request, 'movieswyper/select_genres.html', {
                 'genres': genre_obj_list,
             })
             
@@ -44,9 +45,8 @@ def genres(request):
             try:
                 genre = Genre.objects.get(id=genre)
             except (KeyError, Genre.DoesNotExist):
-                # Redisplaying form
-                return render(request, 'movieswyper/select_genres.html', {  # TODO Check if that actually works
-                    'error_message': "Non-Valid Genre selected. Please try again",
+                messages.error(request, 'Non-Valid Genre selected. Please try again')
+                return render(request, 'movieswyper/select_genres.html', {
                     'genres': genre_obj_list,
                 })
             else:
@@ -55,10 +55,10 @@ def genres(request):
         # Update User Profile: clear existing genres, bulk add new ones
         crnt_user.liked_genres.clear()
         crnt_user.liked_genres.add(*genre_objs)
-        
-        return HttpResponseRedirect(reverse('movieswyper:select_genres'))
-        # TODO: Display Succes Message, maybe through https://docs.djangoproject.com/en/3.2/topics/http/sessions/#examples 
 
+        # DIsplay Success Message
+        messages.success(request, 'Your profile has been updated.')
+        return HttpResponseRedirect(reverse('movieswyper:select_genres'))
 
     # If the site is called for the first time:
     else:

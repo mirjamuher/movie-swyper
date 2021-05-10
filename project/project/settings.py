@@ -72,6 +72,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
+from django.contrib.messages import constants as message_constants
+
+MESSAGE_TAGS = {
+        message_constants.DEBUG: 'alert-secondary',
+        message_constants.INFO: 'alert-info',
+        message_constants.SUCCESS: 'alert-success',
+        message_constants.WARNING: 'alert-warning',
+        message_constants.ERROR: 'alert-danger',
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
