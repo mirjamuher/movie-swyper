@@ -19,7 +19,7 @@
             <div class="col mb-3">
                 <div class="genre genre-card genre-{{ genre.name|slugify }}">
                     <div class="card-body">
-                        <input type="checkbox" name="choice" value="{{ genre.id }}">
+                        <input type="checkbox" id="{{ genre.id }}" name="choice" value="{{ genre.id }}">
                         <label class="card-text font-weight-bold"> {{ genre.name|slugify }} </label><br>
                     </div>
                 </div>
