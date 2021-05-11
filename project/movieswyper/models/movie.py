@@ -27,6 +27,14 @@ class Movie(models.Model):
     def __str__(self):
         return self.title
 
+    def get_full_img_url(self):
+        # TODO: Make url creation scale size of retrieved files to need through helper functions
+        """ https://developers.themoviedb.org/3/getting-started/images """
+        base_url = 'https://image.tmdb.org/'
+        file_size = 't/p/w500'
+        poster_path = self.poster_path
+        return base_url + file_size + poster_path
+
 class ProductionCompany(models.Model):
     '''
     TMdb API gives list of production companies involved in movie making -->

@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib import messages
 
-from movieswyper.models import Genre
+from movieswyper.models import Genre, Movie, Profile
 from project.settings import TMDB_API_KEY
 import requests
 
@@ -22,9 +22,13 @@ Gameplan:
 # FUNCTIONS HANDLING THE ORM
 
 def get_top_movies(liked_genres):
-    # TODO: grab top movies from database based on liked genres.
+    # TODO: grab top movies from database based on liked genres. maybe movie_obj_list.extend(genre_obj.movie_set.order_by('-vote_average', '-popularity')[:int(movies_per_genre)]
     # Important: figure out the math to elegantly show 30, no matter how many genres liked
-    pass
+    # PROBLEM: Movies have the same tag & popularity, need to navigate around that 
+    movies_shown_on_page = 30
+
+    return Movie.objects.order_by('-vote_average', '-popularity')[:movies_shown_on_page]
+
 
 # ACTUAL VIEWS
 
@@ -73,10 +77,20 @@ def genres(request):
 # add login later
 def movies(request):
     crnt_user = request.user.profile
-    liked_genres = crnt_user.liked_genres.all
+    liked_genres = crnt_user.liked_genres.all() # TODO: Use later to adapt content to user
     movie_obj_list = get_top_movies(liked_genres)
 
     context = {
         'movies': movie_obj_list,
     }
     return render(request, 'movieswyper/select_movies.html', context)
+
+def movies_mobile(request):
+    crnt_user = request.user.profile
+    liked_genres = crnt_user.liked_genres.all() # TODO: Use later to adapt content to user
+    movie_obj_list = get_top_movies(liked_genres)
+
+    context = {
+        'movies': movie_obj_list,
+    }
+    return render(request, 'movieswyper/select_movies_mobile.html', context)

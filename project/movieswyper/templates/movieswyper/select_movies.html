@@ -1,7 +1,7 @@
 {% extends "movieswyper/base.html" %}
 {% load static %}
 
-{% block extra_css %} {% endblock %}
+{% block extra_css %} <link rel="stylesheet" href='{% static "movieswyper/css/select_movies.css" %}'> {% endblock %}
 {% block page_title %} Rate your first movies! {% endblock %}
 
 {% block custom_body_id %} id="page-select_movies" {% endblock %}
@@ -9,14 +9,49 @@
 {% block content %}
     {% include 'movieswyper/messages.html' %}
 
-    <h2 class="my-5 text-dark"> How would you rate the movies below? </h2>
-    
-    <ul class="list-group">
-    {% for movie in movies %}
-        <li class="list-group-item"> {{ movie.title }}</li>
-    {% endfor %}
-    </ul>
+    <h2 class="my-5 text-dark"> How do you rate the movies below? </h2>
 
+    <div class="row">
+        {% for movie in movies %}
+        <div class="card-deck col-3">
+            <div class="card mb-3">
+                <img class="card-img-top" src="{{ movie.get_full_img_url }}" alt="{{ movie.title }} poster">
+                <div class="card-body">
+                    <h5 class="card-title"> {{ movie.title }}</h5>
+                    <p class="card-text"> {{ movie.tagline }}</p>
+                </div>
+                    <!-- Button trigger modal -->
+                <div class="card-footer card-no-styling">
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#movie-{{movie.title|slugify}}-modal">
+                        <small class="text-light">
+                            Movie Info
+                        </small>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="movie-{{movie.title|slugify}}-modal" tabindex="-1" role="dialog" aria-labelledby="movie-{{ movie.title|slugify }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="movie-{{ movie.title|slugify }}">{{ movie.title }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {% include 'movieswyper/movie_info_card.html' %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}
 
 {% block additional_js %} {% endblock %}

@@ -1,0 +1,26 @@
+{% extends "movieswyper/base.html" %}
+{% load static %}
+
+{% block extra_css %} {% endblock %}
+{% block page_title %} Rate your first movies! {% endblock %}
+
+{% block custom_body_id %} id="page-select_movies" {% endblock %}
+
+{% block content %}
+    {% include 'movieswyper/messages.html' %}
+
+    <h2 class="my-5 text-dark"> How do you rate the movies below? </h2>
+
+<!--TODO: Put in here a button with the name "S T A R T" or something to start movie rating
+Make sure to also have a ticker on bottom how many movies have been rated and a way to escape
+that also saves the movie rating to the user!
+
+ALSO: Figure out how to only show one movie and not all movies in the obj_list "movies"-->
+    <div class="row">
+        {% for movie in movies %}
+            {% include 'movieswyper/movie_info_card.html' with movie=movie %}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block additional_js %} {% endblock %}

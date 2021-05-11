@@ -1,0 +1,8 @@
+@use 'starter';
+
+body#page-select_movies {
+    .card-no-styling {
+        background-color: transparent !important;
+        border: none !important;
+    }
+}
