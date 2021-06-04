@@ -26,6 +26,10 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class UserMovieRating(models.Model):
+    """
+    Users (ForeignKey) rate Movies (ForeignKey) with attribute rating. 
+    {1: liked; 2: disliked; 3: interested;}
+    """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     movie = models.ForeignKey('Movie', on_delete=models.CASCADE)
     rating = models.IntegerField()

@@ -76,16 +76,31 @@ def genres(request):
 
 # add login later
 def movies(request):
-    crnt_user = request.user.profile
-    liked_genres = crnt_user.liked_genres.all() # TODO: Use later to adapt content to user
+    crnt_user = request.user
+    crnt_user_profile = request.user.profile
+    liked_genres = crnt_user_profile.liked_genres.all() # TODO: Use later to adapt content to user
     movie_obj_list = get_top_movies(liked_genres)
-
     context = {
         'movies': movie_obj_list,
     }
-    return render(request, 'movieswyper/select_movies.html', context)
+    
+    # If form is sent:
+    if request.method == 'POST':
+        selected_movie = ...
+        pass
+
+        # Update User Profile: add new rating of movie
+        pass
+
+        # Reload page with new information
+        return HttpResponseRedirect(reverse('movieswyper:select_movies'))
+
+    # If the site is called for the first time:
+    else:
+        return render(request, 'movieswyper/select_movies.html', context)
 
 def movies_mobile(request):
+    #TODO: Figure out how to do a mobile view of this
     crnt_user = request.user.profile
     liked_genres = crnt_user.liked_genres.all() # TODO: Use later to adapt content to user
     movie_obj_list = get_top_movies(liked_genres)

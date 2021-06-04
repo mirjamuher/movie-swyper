@@ -48,17 +48,11 @@ def run_first_time(page_no):
         data = response.json()
 
         movie_list = get_movie_list(data)
-        movies_tmdb_ids = []
 
         for movie in movie_list:
-            # If the movie is not pornographic, add its id to the list 
+            # If the movie is not pornographic, call the movie API to get full info for our db
             if movie["adult"] == False:
-                movies_tmdb_ids.append(movie["id"])
-        
-        for entry in movies_tmdb_ids:
-            # For each entry in the list, call the individual movie API
-            # to get full information for the population of database
-            call_movie_API(entry)
+                call_movie_API(movie["id"])
 
 
 def get_movie_list(result_dictionary):

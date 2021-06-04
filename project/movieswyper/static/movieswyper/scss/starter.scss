@@ -87,7 +87,7 @@ body {
     font: 100% $font-family-base;
 }
 
-.genre {
+.genre {  // What is this? Is it useful? Is it doing anything?
     color: $black;
 }
 
@@ -101,6 +101,15 @@ body {
     margin-right: 0 !important;
     border: none;
     border-radius: 10px;
+}
+
+.genre-tag {
+    text-align: center;
+    margin-left: 0 !important;
+    margin-right: 10px !important;
+    border: none;
+    border-radius: 10px;
+    display: inline;
 }
 
 @each $genreName, $color in $genre-colors {
@@ -117,6 +126,12 @@ body {
             background-color: $color;
             color: map-get($map: $genre-font-color, $key: $genreName);
         }
+    }
+
+    .genre-#{$genreName}-selected {
+        border: $color solid 1px;
+        color: map-get($map: $genre-font-color, $key: $genreName);
+        background-color: $color;
     }
 }
 

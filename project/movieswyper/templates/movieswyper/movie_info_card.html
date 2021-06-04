@@ -1,14 +1,44 @@
-<h1> {{ movie.title }} </h1>
-<!-- TODO: Later on figure out how to put in production company info etc. -->
+<!-- TODO: Make this prettier -->
 
+{% if movie.backdrop_path %}
+    <img src="{{ movie.get_full_backdrop_url }}" class="img-fluid" alt="{{ movie.title }} alt_poster">
+{% else %}
+    <img src="{{ movie.get_full_poster_url }}" alt="{{ movie.title }} poster">
+{% endif %}
 
-<!-- PUT IN HERE A BACKGROUND OF THE BACKDROP faded out -->
-<!-- PUT IN HERE A SHARP IMAGE (Border?) OF THE POSTER faded out -->
+<div class="container">
+    <div class="row mt-4">
+        <h1 class="text-center"> {{ movie.title }} </h1>
+    </div>
+    {% if movie.tagline %}
+        <div class="row my-2">
+            <h4 class="text-center"> {{ movie.tagline }} </h4>
+        </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-md-auto">
+            <p class="font-weight-light">{{ movie.release_date|date:"M Y" }} | {{ movie.runtime }} min runtime</p>
+        </div>
+        <div class="col-md-auto">
+            <p class="font-weight-light">User Score: {{ movie.vote_average }}</p>
+        </div>
+    </div>
+    <row>
+        <p> {{ movie.overview }}</p>
+    </row>
+    <row> <!-- Prettify the genre tags later! Movie "Wolfwalker" is good for testing -->
+        <div class="col-md-auto" id="genre-container">
+            <div class="row">
+                {% for genre in movie.get_ordered_genres %}
+                    <div class="col-3 genre-tag genre-{{ genre.name|slugify }}-selected">
+                        <p> {{ genre.name|slugify }} </p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </row>
+    {% include 'movieswyper/rate_movie.html' %}
+</div>
 
-<!-- PUT HERE MOVIE TITLE -->
-<!-- PUT HERE RUNTIME & CO in small and slightly greyed out-->
-
-<!-- PUT HERE MOVIE DESCRIPTION -->
-<!-- PUT HERE COLOURFUL GENRE TAGS -->
 
 <!-- PUT HERE RATING OPTIONS and somehow tie them into the user profile databse... -->

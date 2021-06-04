@@ -27,13 +27,24 @@ class Movie(models.Model):
     def __str__(self):
         return self.title
 
-    def get_full_img_url(self):
+    def get_full_poster_url(self):
         # TODO: Make url creation scale size of retrieved files to need through helper functions
         """ https://developers.themoviedb.org/3/getting-started/images """
         base_url = 'https://image.tmdb.org/'
         file_size = 't/p/w500'
         poster_path = self.poster_path
         return base_url + file_size + poster_path
+
+    def get_full_backdrop_url(self):
+        # TODO: Make url creation scale size of retrieved files to need through helper functions
+        """ https://developers.themoviedb.org/3/getting-started/images """
+        base_url = 'https://image.tmdb.org/'
+        file_size = 't/p/original'
+        backdrop_path = self.backdrop_path
+        return base_url + file_size + backdrop_path
+
+    def get_ordered_genres(self):
+        return self.genres.all().order_by('name')
 
 class ProductionCompany(models.Model):
     '''

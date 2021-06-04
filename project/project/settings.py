@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 #TODO: Before deploy, find different way to hide keys (now in local_settings)
+#TODO: Before deploy, find a save way to serve static files https://docs.djangoproject.com/en/3.2/howto/static-files/ 
 
 from pathlib import Path
 

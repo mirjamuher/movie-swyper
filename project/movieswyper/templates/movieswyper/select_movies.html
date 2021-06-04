@@ -1,3 +1,5 @@
+{% comment %} #TODO: Colour already rated movies accordingly {% endcomment %}
+
 {% extends "movieswyper/base.html" %}
 {% load static %}
 
@@ -15,25 +17,26 @@
         {% for movie in movies %}
         <div class="card-deck col-3">
             <div class="card mb-3">
-                <img class="card-img-top" src="{{ movie.get_full_img_url }}" alt="{{ movie.title }} poster">
+                <img class="card-img-top" src="{{ movie.get_full_poster_url }}" alt="{{ movie.title }} poster">
                 <div class="card-body">
                     <h5 class="card-title"> {{ movie.title }}</h5>
-                    <p class="card-text"> {{ movie.tagline }}</p>
-                </div>
+                    <p class="card-text"> {{ movie.overview | truncatewords:20 }}</p>
                     <!-- Button trigger modal -->
-                <div class="card-footer card-no-styling">
                     <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#movie-{{movie.title|slugify}}-modal">
                         <small class="text-light">
                             Movie Info
                         </small>
                     </button>
                 </div>
+                <div class="card-footer card-no-styling">
+                    {% include 'movieswyper/rate_movie.html' with movie=movie %}
+                </div>
             </div>
         </div>
 
         <!-- Modal -->
         <div class="modal fade" id="movie-{{movie.title|slugify}}-modal" tabindex="-1" role="dialog" aria-labelledby="movie-{{ movie.title|slugify }}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="movie-{{ movie.title|slugify }}">{{ movie.title }}</h5>

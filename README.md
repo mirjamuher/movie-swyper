@@ -6,6 +6,7 @@ To be edited as the project evolves.
 Credits
 The Movie Database API https://developers.themoviedb.org/3/getting-started/introduction 
 Color Scheme: https://themestr.app/
+Vector Graphics: <a href="https://www.freepik.com/vectors/heart">Heart vector created by kreativkolors - www.freepik.com</a>, <a href="https://www.freepik.com" title="Freepik"> Icons made by Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
 
 Installation Instructions (rough notes)
 1. create venv
