@@ -5,36 +5,19 @@
 <!-- clicking them automatically adds rating to database AND colors card & movie background in applicable rating -->
 <!-- 1: liked; 2: disliked; 3: interested -->
 
-{% comment %} <div class="container">
+<div class="container">
     <div class="row">
         <div class = "col-4">
-            <img src="{% static 'movieswyper/images/thumbs_up.png' %}" alt="Like" height="50">
+            <input type="button" class="imgBtn likeBtn" alt="Like" data-rating="1" data-movie-id="{{ movie.id }}"></input>
         </div>
         <div class = "col-4">
-            <img src="{% static 'movieswyper/images/eyes.png' %}" alt="Interested" height="50">
+            <input type="button" class="imgBtn interestedBtn" alt="Interested" data-rating="3" data-movie-id="{{ movie.id }}"></input>
         </div>
         <div class = "col-4">
-            <img src="{% static 'movieswyper/images/thumbs_down.png' %}" alt="Dislike" height="50">
+            <input type="button" class="imgBtn dislikeBtn" alt="Dislike" data-rating="2" data-movie-id="{{ movie.id }}"></input>
         </div>
     </div>
-</div> {% endcomment %}
-
-<form action="{% url 'movieswyper:select_movies' %}" method="post">
-    {% csrf_token %}
-    <div class="container">
-        <div class="row">
-            <div class = "col-4">
-                <input type="image" src="{% static 'movieswyper/images/thumbs_up.png' %}" alt="Like" height="50">
-            </div>
-            <div class = "col-4">
-                <img src="{% static 'movieswyper/images/eyes.png' %}" alt="Interested" height="50">
-            </div>
-            <div class = "col-4">
-                <img src="{% static 'movieswyper/images/thumbs_down.png' %}" alt="Dislike" height="50">
-            </div>
-        </div>
-    </div>
-</form>
+</div>
 
 <!-- Idea 1: Make the images buttons with background images -->
 <!-- Idea 2: Make each image its own form that has a hidden input field which contains the movie id -->

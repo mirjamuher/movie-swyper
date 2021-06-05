@@ -29,7 +29,6 @@ def get_top_movies(liked_genres):
 
     return Movie.objects.order_by('-vote_average', '-popularity')[:movies_shown_on_page]
 
-
 # ACTUAL VIEWS
 
 @login_required
@@ -80,24 +79,15 @@ def movies(request):
     crnt_user_profile = request.user.profile
     liked_genres = crnt_user_profile.liked_genres.all() # TODO: Use later to adapt content to user
     movie_obj_list = get_top_movies(liked_genres)
+
+    for movie in movie_obj_list:
+        movie.user_movie_rating = movie.get_rating(crnt_user)
+
     context = {
         'movies': movie_obj_list,
     }
-    
-    # If form is sent:
-    if request.method == 'POST':
-        selected_movie = ...
-        pass
-
-        # Update User Profile: add new rating of movie
-        pass
-
-        # Reload page with new information
-        return HttpResponseRedirect(reverse('movieswyper:select_movies'))
-
-    # If the site is called for the first time:
-    else:
-        return render(request, 'movieswyper/select_movies.html', context)
+    #TODO: Style rendered page with rating of movies already showcased 
+    return render(request, 'movieswyper/select_movies.html', context)
 
 def movies_mobile(request):
     #TODO: Figure out how to do a mobile view of this

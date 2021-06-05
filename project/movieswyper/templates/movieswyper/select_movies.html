@@ -1,14 +1,17 @@
-{% comment %} #TODO: Colour already rated movies accordingly {% endcomment %}
-
 {% extends "movieswyper/base.html" %}
 {% load static %}
 
-{% block extra_css %} <link rel="stylesheet" href='{% static "movieswyper/css/select_movies.css" %}'> {% endblock %}
+{% block extra_css %} 
+<link rel="stylesheet" href='{% static "movieswyper/css/select_movies.css" %}'> 
+<link rel="stylesheet" href='{% static "movieswyper/css/rate_movie.css" %}'>
+{% endblock %}
 {% block page_title %} Rate your first movies! {% endblock %}
 
 {% block custom_body_id %} id="page-select_movies" {% endblock %}
 
 {% block content %}
+{% comment %} #TODO: Colour already rated movies accordingly {% endcomment %}
+
     {% include 'movieswyper/messages.html' %}
 
     <h2 class="my-5 text-dark"> How do you rate the movies below? </h2>
@@ -16,7 +19,7 @@
     <div class="row">
         {% for movie in movies %}
         <div class="card-deck col-3">
-            <div class="card mb-3">
+            <div class="card mb-3 rating-{{ movie.user_movie_rating }}" data-card-movie-id="{{ movie.id }}">
                 <img class="card-img-top" src="{{ movie.get_full_poster_url }}" alt="{{ movie.title }} poster">
                 <div class="card-body">
                     <h5 class="card-title"> {{ movie.title }}</h5>
@@ -57,4 +60,6 @@
     </div>
 {% endblock %}
 
-{% block additional_js %} {% endblock %}
+{% block additional_js %} 
+    <script src='{% static "movieswyper/js/rate_movie.js" %}'></script>
+{% endblock %}

@@ -46,6 +46,16 @@ class Movie(models.Model):
     def get_ordered_genres(self):
         return self.genres.all().order_by('name')
 
+    def get_rating(self, user):
+        from movieswyper.models import UserMovieRating
+
+        try:
+            return UserMovieRating.objects.get(user=user, movie=self).rating
+        except UserMovieRating.DoesNotExist:
+            return 0
+
+
+
 class ProductionCompany(models.Model):
     '''
     TMdb API gives list of production companies involved in movie making -->

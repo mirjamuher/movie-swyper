@@ -135,4 +135,22 @@ body {
     }
 }
 
+// Formatting movie rating colouring
+$like: #aed581;
+$dislike: #e57373;
+$interested: #fff176;
+
+$rating-colors: (
+    "0": inherit,
+    "1": $like,
+    "2": $dislike,
+    "3": $interested,
+);
+
+@each $rating, $color in $rating-colors {
+    .rating-#{$rating} {
+        background-color: $color;
+    }
+};
+
 // To compile: $ npm run css-compile
